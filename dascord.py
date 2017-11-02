@@ -24,6 +24,7 @@ async def on_ready():
 @bot.event
 async def on_message(message):
     print(message.content)
+    #await bot.delete_message(message)
     await bot.process_commands(message)
 
 
@@ -48,7 +49,12 @@ async def hot(ctx, num : int = 0):
     except:
         await bot.say("Something went wrong :(")
         return
-    await bot.say(ctx.message.author.mention + " " + str(data[0]) + '\n' + str(data[1]))
+    if num == 0:
+        msg = " This is the hottest image from 9FAG: "
+    else:
+        msg = " This is the hottest image number " + str(num - 1) + "# from 9FAG: "
+    await bot.say(ctx.message.author.mention + msg + str(data[0]) + '\n' + str(data[1]))
+    await bot.delete_message(ctx.message)
 
 
 @bot.command(pass_context=True)
@@ -59,7 +65,12 @@ async def new(ctx, num : int = 0):
     except:
         await bot.say("Something went wrong :(")
         return
-    await bot.say(ctx.message.author.mention + " " + str(data[0]) + '\n' + str(data[1]))
+    if num == 0:
+        msg = " This is the newest image from 9FAG: "
+    else:
+        msg = " This is the newest image number " + str(num - 1) + "# from 9FAG: "
+    await bot.say(ctx.message.author.mention + msg + str(data[0]) + '\n' + str(data[1]))
+    await bot.delete_message(ctx.message)
 
 
 @bot.command(pass_context=True)
@@ -73,7 +84,12 @@ async def sec(ctx, sec : str = "funny", num : int = 0):
     except:
         await bot.say("Something went wrong :(")
         return
-    await bot.say(ctx.message.author.mention + " " + str(data[0]) + '\n' + str(data[1]))
+    if num == 0:
+        msg = " This is the hottest image from your section (" + sec + "): "
+    else:
+        msg = " This is the hottest image number " + str(num - 1) + "# from your section (" + sec + "): "
+    await bot.say(ctx.message.author.mention + msg + str(data[0]) + '\n' + str(data[1]))
+    await bot.delete_message(ctx.message)
 
 
 @bot.command(pass_context=True)
@@ -82,7 +98,8 @@ async def img(ctx, search: str):
     if not search:
         await bot.say("Nothing to search for :(")
         return
-    await bot.say(ctx.message.author.mention + " " + lib_images.img(search))
+    await bot.say(ctx.message.author.mention + " I searched for " + search + ". And I found this: " + lib_images.img(search))
+    await bot.delete_message(ctx.message)
 
 
 bot.run(secrets.DISCORD_KEY)
