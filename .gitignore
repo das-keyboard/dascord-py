@@ -6,6 +6,8 @@ __pycache__/
 # Secret!
 secrets.py
 
+.idea/
+
 # C extensions
 *.so
 
