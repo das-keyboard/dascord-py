@@ -26,7 +26,10 @@ async def on_ready():
 async def on_message(message):
     print(message.content)
     # await bot.delete_message(message)
-    await bot.process_commands(message)
+    try:
+        await bot.process_commands(message)
+    except Exception as err:
+        await bot.say(message.channel, "OBJECTION! ...ehh EXCEPTION!: {0}".format(err))
 
 
 @bot.command(pass_context=True)
