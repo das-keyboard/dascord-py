@@ -153,7 +153,8 @@ async def wiki(ctx, search: str, local: str = 'de', first: int = 0):
 async def buy(ctx):
     data = lib_draemel.randomart()
     await bot.say(
-        ctx.message.author.mention + ' You should really buy this: ' + data[0] + ' ' + data[1])
+        ctx.message.author.mention + ' You should really buy this: ' + data[0] + ' \n' + data[1])
+    await bot.delete_message(ctx.message)
 
 
 bot.run(secrets.DISCORD_KEY)
