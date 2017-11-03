@@ -141,7 +141,7 @@ async def admin(ctx, com: str = ''):
 
 
 @bot.command(pass_context=True)
-async def wiki(ctx, search: str, local: str = 'de', first: int = 1):
+async def wiki(ctx, search: str, local: str = 'de', first: int = 0):
     """Gives Wikipedia summary..."""
     await bot.say(
         ctx.message.author.mention + ' Knowledge is power! Take this: ' + lib_wikipedia.wikisum(search, local, first))
