@@ -32,7 +32,7 @@ async def on_message(message):
 @bot.command(pass_context=True)
 async def ping(ctx):
     """...Pong"""
-    await bot.add_reaction(ctx.message, '\U0001F44D')
+    await bot.add_reaction(ctx.message, '\U0001F3D3')
 
 
 @bot.command()
