@@ -48,7 +48,7 @@ async def issue(num: int):
 
 
 @bot.command(pass_context=True)
-async def hot(ctx, num : int = 0):
+async def hot(ctx, num: int = 0):
     """Posts hottest Image on 9FAG"""
     try:
         data = lib_9gag.gethottestimg(num)
@@ -64,7 +64,7 @@ async def hot(ctx, num : int = 0):
 
 
 @bot.command(pass_context=True)
-async def new(ctx, num : int = 0):
+async def new(ctx, num: int = 0):
     """Posts newest Image on 9FAG"""
     try:
         data = lib_9gag.getnewestimg(num)
@@ -80,7 +80,7 @@ async def new(ctx, num : int = 0):
 
 
 @bot.command(pass_context=True)
-async def sec(ctx, sec : str = "funny", num : int = 0):
+async def sec(ctx, sec: str = "funny", num: int = 0):
     """Posts newest Image on 9FAG"""
     if sec == "anime-manga":
         await bot.say(ctx.message.author.mention + " " + "FUCKING WEEB! GTFO! REEEEEEEEEEEEEEEE")
@@ -106,10 +106,12 @@ async def img(ctx, search: str, num: int = 0):
         return
     if num == 0:
         await bot.say(
-            ctx.message.author.mention + " I searched for " + search + ". And I found this: " + lib_images.img(search, num))
+            ctx.message.author.mention + " I searched for " + search + ". And I found this: " + lib_images.img(search,
+                                                                                                               num))
     else:
         await bot.say(
-            ctx.message.author.mention + " I searched for " + search + "[#" + str(num) + "]. And I found this: " + lib_images.img(search, num))
+            ctx.message.author.mention + " I searched for " + search + "[#" + str(
+                num) + "]. And I found this: " + lib_images.img(search, num))
     await bot.delete_message(ctx.message)
 
 
@@ -158,6 +160,3 @@ async def buy(ctx):
 
 
 bot.run(secrets.DISCORD_KEY)
-
-
-

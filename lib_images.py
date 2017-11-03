@@ -27,4 +27,3 @@ def img(search: str, num: int):
     if not img:
         return "No Image found :("
     return img
-
