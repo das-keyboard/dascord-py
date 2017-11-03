@@ -18,7 +18,7 @@ def img(search: str, num: int):
         count = 1
         select = 0
     searchurl = "https://www.googleapis.com/customsearch/v1?q=" + \
-                search + "&start=" + index + "&num=" + count + "&key=" + key + "&cx=" + id + \
+                search + "&start=" + str(index) + "&num=" + str(count) + "&key=" + str(key) + "&cx=" + id + \
                 "&searchType=image"
     r = requests.get(searchurl)
     response = r.content.decode('utf-8')

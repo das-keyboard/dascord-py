@@ -104,8 +104,7 @@ async def img(ctx, search: str, num: int = 0):
             ctx.message.author.mention + " I searched for " + search + ". And I found this: " + lib_images.img(search, num))
     else:
         await bot.say(
-            ctx.message.author.mention + " I searched for " + search + "[#" + num + "]. And I found this: " + lib_images.img(search, num))
-
+            ctx.message.author.mention + " I searched for " + search + "[#" + str(num) + "]. And I found this: " + lib_images.img(search, num))
     await bot.delete_message(ctx.message)
 
 
