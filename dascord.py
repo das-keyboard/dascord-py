@@ -2,6 +2,7 @@ import discord
 import lib_9gag
 import lib_images
 import lib_admintools
+import lib_wikipedia
 import secrets
 from discord.ext import commands
 
@@ -137,6 +138,14 @@ async def admin(ctx, com: str = ''):
             lib_admintools.stop()
             return
         await bot.send_message(ctx.message.channel, 'Command not found...')
+
+
+@bot.command(pass_context=True)
+async def wiki(ctx, search: str, local: str = 'de', first: int = 1):
+    """Gives Wikipedia summary..."""
+    await bot.say(
+        ctx.message.author.mention + ' Knowledge is power! Take this: ' + lib_wikipedia.wikisum(search, local, first))
+    await bot.delete_message(ctx.message)
 
 
 bot.run(secrets.DISCORD_KEY)
