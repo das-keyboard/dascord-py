@@ -25,18 +25,18 @@ async def on_ready():
 @bot.event
 async def on_message(message):
     print(message.content)
-    #await bot.delete_message(message)
+    # await bot.delete_message(message)
     await bot.process_commands(message)
 
 
-@bot.command()
-async def info():
-    """Gives Information"""
-    await bot.say(description)
+@bot.command(pass_context=True)
+async def ping(ctx):
+    """...Pong"""
+    await bot.add_reaction(ctx.message, '\U0001F44D')
 
 
 @bot.command()
-async def issue(num : int):
+async def issue(num: int):
     """Links to the given Github-Issue"""
     await bot.say('''Issue:
     https://github.com/das-keyboard/speedrun-the-game/issues/''' + str(num))
