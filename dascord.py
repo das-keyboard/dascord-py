@@ -3,6 +3,7 @@ import lib_9gag
 import lib_images
 import lib_admintools
 import lib_wikipedia
+import lib_draemel
 import secrets
 from discord.ext import commands
 
@@ -146,6 +147,13 @@ async def wiki(ctx, search: str, local: str = 'de', first: int = 0):
     await bot.say(
         ctx.message.author.mention + ' Knowledge is power! Take this: ' + lib_wikipedia.wikisum(search, local, first))
     await bot.delete_message(ctx.message)
+
+
+@bot.command(pass_context=True)
+async def buy(ctx):
+    data = lib_draemel.randomart()
+    await bot.say(
+        ctx.message.author.mention + ' You should really buy this: ' + data[0] + ' ' + data[1])
 
 
 bot.run(secrets.DISCORD_KEY)
