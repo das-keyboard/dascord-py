@@ -1,6 +1,7 @@
 import discord
 import lib_9gag
 import lib_images
+import lib_admintools
 import secrets
 from discord.ext import commands
 
@@ -100,6 +101,34 @@ async def img(ctx, search: str):
         return
     await bot.say(ctx.message.author.mention + " I searched for " + search + ". And I found this: " + lib_images.img(search))
     await bot.delete_message(ctx.message)
+
+
+@bot.command(pass_context=True)
+async def admin(ctx, com: str = ''):
+    """A set of admin tools"""
+    if not ctx.message.author.id == secrets.MYID:
+        await bot.say("You are not my master!")
+        return
+    else:
+        if com == 'reload':
+            msg = await bot.send_message(ctx.message.channel, 'Reloading...')
+            link = lib_admintools.reload()
+            if not link:
+                await bot.edit_message(msg, 'Something went wrong. Abort!')
+                return
+            await bot.edit_message(msg, 'Done reloading: ' + link)
+            await bot.send_message(ctx.message.channel, 'Restarting...')
+            lib_admintools.restart()
+            return
+        if com == 'restart':
+            await bot.send_message(ctx.message.channel, 'Restarting...')
+            lib_admintools.restart()
+            return
+        if com == 'stop':
+            await bot.send_message(ctx.message.channel, 'RIP me :(')
+            lib_admintools.stop()
+            return
+        await bot.send_message(ctx.message.channel, 'Command not found...')
 
 
 bot.run(secrets.DISCORD_KEY)
