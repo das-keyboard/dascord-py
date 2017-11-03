@@ -94,12 +94,18 @@ async def sec(ctx, sec : str = "funny", num : int = 0):
 
 
 @bot.command(pass_context=True)
-async def img(ctx, search: str):
+async def img(ctx, search: str, num: int = 0):
     """Searches for an Image..."""
     if not search:
         await bot.say("Nothing to search for :(")
         return
-    await bot.say(ctx.message.author.mention + " I searched for " + search + ". And I found this: " + lib_images.img(search))
+    if num == 0:
+        await bot.say(
+            ctx.message.author.mention + " I searched for " + search + ". And I found this: " + lib_images.img(search, num))
+    else:
+        await bot.say(
+            ctx.message.author.mention + " I searched for " + search + "[#" + num + "]. And I found this: " + lib_images.img(search, num))
+
     await bot.delete_message(ctx.message)
 
 
