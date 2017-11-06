@@ -169,4 +169,8 @@ async def buy(ctx):
     await bot.delete_message(ctx.message)
 
 
+@bot.command()
+async def game(*, game: str = "No Game"):
+    await bot.change_presence(game=discord.Game(name=game))
+
 bot.run(secrets.DISCORD_KEY)
