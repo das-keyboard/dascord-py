@@ -14,12 +14,13 @@ Just one simple bot...'''
 
 client = discord.Client()
 bot = commands.Bot(command_prefix='$', description=description)
-bot.change_presence(game=discord.Game(name='suicide'))
 
 
 @bot.event
 async def on_ready():
     sys.stderr = lib_admintools.errLog
+    sys.stdout = lib_admintools.stdlog
+    await bot.change_presence(game=discord.Game(name='suicide'))
     print('Logged in as')
     print(bot.user.name)
     print(bot.user.id)
@@ -28,7 +29,7 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
-    print(message.content)
+    print(str(message.timestamp) + ' > ' + str(message.author) + '@' + str(message.server.name) + '->' + str(message.channel.name) + ': ' + str(message.content))
     # await bot.delete_message(message)
     try:
         await bot.process_commands(message)
@@ -141,6 +142,9 @@ async def admin(ctx, com: str = ''):
         if com == 'stop':
             await bot.send_message(ctx.message.channel, 'RIP me :(')
             lib_admintools.stop()
+            return
+        if com == 'errlog':
+            await bot.send_message(ctx.message.channel, 'Listen to my Feelings:\n' + str(lib_admintools.geterrlog()))
             return
         if com == 'log':
             await bot.send_message(ctx.message.channel, 'Listen to my Feelings:\n' + str(lib_admintools.getlog()))
