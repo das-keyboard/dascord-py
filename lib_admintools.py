@@ -5,8 +5,12 @@ import os
 import random
 from io import StringIO
 
-errlog = StringIO()
-stdlog = StringIO()
+log = StringIO()
+
+
+def clearlog():
+    log.truncate(0)
+    log.seek(0)
 
 
 def reload():
@@ -26,23 +30,13 @@ def stop():
     exit(0)
 
 
-def geterrlog():
-    data = errlog.getvalue()
-    if not data:
-        return "No Problems detected"
-    name = 'DasCord-ErrorLog_' + str(random.randint(0, 999))
-    pastebin = lib_pastebin.PasteBin(secrets.PASTEBIN_KEY)
-    link = pastebin.paste(data, guest=True, private=1, expire='1H', name=str(name))
-    # clearerrlog()
-    return link
-
-def getstdlog():
-    data = stdlog.getvalue()
+def getlog():
+    data = log.getvalue()
     if not data:
         return "No Log avaiable"
-    name = 'DasCord-Log_' + str(random.randint(0,999))
+    name = 'DasCord-Log_' + str(random.randint(0, 999))
     pastebin = lib_pastebin.PasteBin(secrets.PASTEBIN_KEY)
-    link = pastebin.paste(data, guest=True,private=1, expire='1H', name=str(name))
-    # clearstdlog()
+    link = pastebin.paste(data, guest=True, private=1, expire='1H', name=str(name))
+    clearlog()
     return link
 
