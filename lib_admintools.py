@@ -9,8 +9,9 @@ log = StringIO()
 
 
 def clearlog():
-    log.truncate(0)
-    log.seek(0)
+    global log
+    log = StringIO()
+    return
 
 
 def reload():
