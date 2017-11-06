@@ -8,15 +8,6 @@ from io import StringIO
 errlog = StringIO()
 stdlog = StringIO()
 
-def clearerrlog():
-    errlog.truncate(0)
-    errlog.seek(0)
-    return
-
-def clearstdlog():
-    stdlog.truncate(0)
-    stdlog.seek(0)
-    return
 
 def reload():
     name = 'DasCord-UpdateLog_' + str(random.randint(0, 999))
@@ -42,7 +33,7 @@ def geterrlog():
     name = 'DasCord-ErrorLog_' + str(random.randint(0, 999))
     pastebin = lib_pastebin.PasteBin(secrets.PASTEBIN_KEY)
     link = pastebin.paste(data, guest=True, private=1, expire='1H', name=str(name))
-    clearerrlog()
+    # clearerrlog()
     return link
 
 def getstdlog():
@@ -52,6 +43,6 @@ def getstdlog():
     name = 'DasCord-Log_' + str(random.randint(0,999))
     pastebin = lib_pastebin.PasteBin(secrets.PASTEBIN_KEY)
     link = pastebin.paste(data, guest=True,private=1, expire='1H', name=str(name))
-    clearstdlog()
+    # clearstdlog()
     return link
 

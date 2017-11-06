@@ -18,7 +18,7 @@ bot = commands.Bot(command_prefix='$', description=description)
 
 @bot.event
 async def on_ready():
-    sys.stderr = lib_admintools.errLog
+    sys.stderr = lib_admintools.errlog
     sys.stdout = lib_admintools.stdlog
     await bot.change_presence(game=discord.Game(name='suicide'))
     print('Logged in as')
@@ -29,7 +29,11 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
-    print(str(message.timestamp) + ' > ' + str(message.author) + '@' + str(message.server.name) + '->' + str(message.channel.name) + ': ' + str(message.content))
+    if not message.server:
+        server = "PM"
+    else:
+        server = message.server.name
+    print(str(message.timestamp) + ' > ' + str(message.author) + '@' + str(server) + '->' + str(message.channel.name) + ': ' + str(message.content))
     # await bot.delete_message(message)
     try:
         await bot.process_commands(message)
@@ -147,7 +151,7 @@ async def admin(ctx, com: str = ''):
             await bot.send_message(ctx.message.channel, 'Listen to my Feelings:\n' + str(lib_admintools.geterrlog()))
             return
         if com == 'log':
-            await bot.send_message(ctx.message.channel, 'Listen to my Feelings:\n' + str(lib_admintools.getlog()))
+            await bot.send_message(ctx.message.channel, 'Listen to my Feelings:\n' + str(lib_admintools.getstdlog()))
             return
         await bot.send_message(ctx.message.channel, 'Command not found...')
 
