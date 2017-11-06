@@ -2,12 +2,18 @@ import lib_pastebin
 import secrets
 import subprocess
 import os
+import random
+from io import StringIO
+
+
+errLog = StringIO()
 
 
 def reload():
+    name = 'DasCord-UpdateLog_' + str(random.randint(0, 999))
     pastebin = lib_pastebin.PasteBin(secrets.PASTEBIN_KEY)
     output = subprocess.getoutput('git pull')
-    link = pastebin.paste(output, guest=True, private=0, expire='1H', name='DasCord-Log')
+    link = pastebin.paste(output, guest=True, private=0, expire='1H', name=str(name))
     return link
 
 
@@ -18,3 +24,13 @@ def restart():
 
 def stop():
     exit(0)
+
+
+def getlog():
+    data = errLog.getvalue()
+    if not data:
+        return "No Problems detected"
+    name = 'DasCord-ErrorLog_' + str(random.randint(0, 999))
+    pastebin = lib_pastebin.PasteBin(secrets.PASTEBIN_KEY)
+    link = pastebin.paste(data, guest=True, private=1, expire='1H', name=str(name))
+    return link
