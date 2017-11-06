@@ -18,8 +18,8 @@ bot = commands.Bot(command_prefix='$', description=description)
 
 @bot.event
 async def on_ready():
-    sys.stderr = lib_admintools.stdlog
-    sys.stdout = lib_admintools.stdlog
+    sys.stderr = lib_admintools.log
+    sys.stdout = lib_admintools.log
     await bot.change_presence(game=discord.Game(name='suicide'))
     print('Logged in as')
     print(bot.user.name)
