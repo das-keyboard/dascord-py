@@ -296,7 +296,8 @@ class PasteBin:
         params = {'api_dev_key': self.api_dev_key, 'api_user_name': username, 'api_user_password': password}
         return api_call('api_login.php', params)
 
-    def paste(self, data, guest=False, name=None, format=None, private=None, expire=None):
+    def paste(self, data: object, guest: object = False, name: object = None, format: object = None,
+              private: object = None, expire: object = None) -> object:
         params = {'api_dev_key': self.api_dev_key, 'api_option': 'paste', 'api_paste_code': data}
         if not guest: params['api_user_key'] = self.api_user_key
         if name: params['api_paste_name'] = name
