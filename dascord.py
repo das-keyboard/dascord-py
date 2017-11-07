@@ -189,7 +189,6 @@ async def game(ctx, *, game: str = "No Game"):
 
 @bot.command(pass_context=True)
 async def calc(ctx, *, erg: str = '1 + 1'):
-    await bot.send_message(ctx.message.channel, )
     await bot.say(ctx.message.author.mention + ' ' + erg + ' = ' + str(lib_calc.calc(erg)))
     await bot.delete_message(ctx.message)
 
