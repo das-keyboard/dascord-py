@@ -183,7 +183,7 @@ async def buy(ctx):
 @bot.command(pass_context=True)
 async def game(ctx, *, game: str = "No Game"):
     await bot.change_presence(game=discord.Game(name=game))
-    bot.say('I`ll play a round of ' + game + ' now. Please do not disturb!')
+    await bot.say('I`ll play a round of ' + game + ' now. Please do not disturb!')
     await bot.delete_message(ctx.message)
 
 bot.run(secrets.DISCORD_KEY)
