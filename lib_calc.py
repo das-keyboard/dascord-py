@@ -1,4 +1,4 @@
-def calc(*, erg: str):
+def calc(erg: str):
     if erg.islower() or erg.isupper():
         return 'Invalid calculation'
     try:
