@@ -4,6 +4,7 @@ import lib_images
 import lib_admintools
 import lib_wikipedia
 import lib_draemel
+import lib_calc
 import secrets
 import sys
 from discord.ext import commands
@@ -184,6 +185,12 @@ async def buy(ctx):
 async def game(ctx, *, game: str = "No Game"):
     await bot.change_presence(game=discord.Game(name=game))
     await bot.say('I`ll play a round of ' + game + ' now. Please do not disturb!')
+    await bot.delete_message(ctx.message)
+
+@bot.command(pass_context=True)
+async def calc(ctx, *, erg: str = '1 + 1'):
+    await bot.send_message(ctx.message.channel, )
+    await bot.say(ctx.message.author.mention + ' ' + erg + ' = ' + str(lib_calc.calc(erg)))
     await bot.delete_message(ctx.message)
 
 bot.run(secrets.DISCORD_KEY)
