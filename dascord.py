@@ -123,6 +123,17 @@ async def img(ctx, search: str, num: int = 0):
 
 
 @bot.command(pass_context=True)
+async def i(ctx, *, search: str):
+    """Searches for an Image... but much simpler."""
+    if not search:
+        await bot.say("Nothing to search for :(")
+        return
+    await bot.say(
+        ctx.message.author.mention + " I searched for " + search + ". And I found this: " + lib_images.img(search, 0))
+    await bot.delete_message(ctx.message)
+
+
+@bot.command(pass_context=True)
 async def admin(ctx, com: str = ''):
     """A set of admin tools"""
     if not ctx.message.author.id == secrets.MYID:
@@ -169,8 +180,10 @@ async def buy(ctx):
     await bot.delete_message(ctx.message)
 
 
-@bot.command()
-async def game(*, game: str = "No Game"):
+@bot.command(pass_context=True)
+async def game(ctx, *, game: str = "No Game"):
     await bot.change_presence(game=discord.Game(name=game))
+    bot.say('I`ll play a round of ' + game + ' now. Please do not disturb!')
+    await bot.delete_message(ctx.message)
 
 bot.run(secrets.DISCORD_KEY)
