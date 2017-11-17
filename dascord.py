@@ -192,4 +192,13 @@ async def calc(ctx, *, erg: str = '1 + 1'):
     await bot.say(ctx.message.author.mention + ' ' + str(erg) + ' = ' + str(lib_calc.calc(erg)))
     await bot.delete_message(ctx.message)
 
+@bot.command(pass_context=True)
+async def loopi(ctx, *, search: str):
+    if not search:
+        await bot.say("Nothing to search for :(")
+        return
+    await bot.say("I'm just getting started... " + lib_images.img(search, 0))
+    await bot.delete_message(ctx.message)
+    await bot.say("$loopi " + search)
+
 bot.run(secrets.DISCORD_KEY)
